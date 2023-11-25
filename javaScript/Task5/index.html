@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persons Information</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    #persons-container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+    }
+
+    .person {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="persons-container">
+    <h2>Persons Information</h2>
+    <div id="persons-list"></div>
+  </div>
+
+  <script>
+    fetch('persons.json')
+      .then(response => response.json())
+      .then(persons => {
+        const personsList = document.getElementById('persons-list');
+
+        persons.forEach(person => {
+          const personDiv = document.createElement('div');
+          personDiv.classList.add('person');
+          personDiv.textContent = `Name: ${person.name}, Age: ${person.age}, Place: ${person.place}, DOB: ${person.dob}`;
+          personsList.appendChild(personDiv);
+        });
+      })
+      .catch(error => console.error('Error fetching JSON:', error));
+  </script>
+</body>
+</html>
